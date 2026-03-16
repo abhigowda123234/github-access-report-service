@@ -1,0 +1,153 @@
+# GitHub Organization Access Report Service
+
+## Overview
+
+This project implements a lightweight Java service that connects to the GitHub API and generates a report showing which users have access to repositories within a GitHub organization.
+
+The application authenticates with GitHub using a Personal Access Token, retrieves repository information from the organization, determines collaborators for each repository, and generates an aggregated access report.
+
+The report is exposed through a REST API endpoint that returns structured JSON data mapping users to the repositories they can access.
+
+---
+
+## Features
+
+* GitHub API authentication using Personal Access Token
+* Retrieve repositories from a GitHub organization
+* Fetch collaborator access information for each repository
+* Generate aggregated user-to-repository access mapping
+* REST API endpoint returning JSON access report
+* Lightweight HTTP server implementation
+
+---
+
+## Technology Stack
+
+* Java
+* GitHub REST API
+* Java HTTP Server
+
+---
+
+## Project Structure
+
+```
+github-access-report-service
+│
+├── src
+│   └── GitHubAccessReportServer.java
+│
+├── GitHubAccessReportServer.jar
+│
+├── README.md
+│
+└── .gitignore
+```
+
+---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```
+git clone https://github.com/YOUR_USERNAME/github-access-report-service.git
+cd github-access-report-service
+```
+
+---
+
+### 2. Configure GitHub Authentication
+
+Create a GitHub Personal Access Token with the following permissions:
+
+* `repo`
+* `read:org`
+
+You can create a token at:
+
+```
+https://github.com/settings/tokens
+```
+
+---
+
+### 3. Set Environment Variables
+
+#### Windows (PowerShell)
+
+```
+$env:GITHUB_TOKEN="your_github_token"
+$env:GITHUB_ORG="your_organization_name"
+```
+$env:GITHUB_TOKEN="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"
+$env:GITHUB_ORG="jithesh-org"
+```
+
+---
+
+### 4. Run the Application
+
+```
+java -jar GitHubAccessReportServer.jar
+```
+
+The server will start at:
+
+```
+http://localhost:8080
+```
+
+---
+
+### 5. Access the API Endpoint
+
+Open the following URL in your browser:
+
+```
+http://localhost:8080/report
+```
+
+This endpoint returns the repository access report in JSON format.
+
+---
+
+## Example API Response
+
+{"Jithesh-cmd":["test-repo"]}
+
+This output represents a mapping of users to the repositories they have access to.
+
+---
+
+## Design Decisions
+
+* GitHub REST API is used to retrieve repository and collaborator data.
+* Users are aggregated into a single mapping that lists all repositories they can access.
+* Environment variables are used to securely configure authentication.
+* A lightweight built-in Java HTTP server is used to keep the implementation simple.
+
+---
+
+## Assumptions
+
+* The GitHub Personal Access Token has sufficient permissions.
+* The authenticated user has access to the organization repositories.
+* Repositories may contain multiple collaborators.
+
+---
+
+## Future Improvements
+
+* Support GitHub API pagination for organizations with many repositories
+* Implement parallel API requests for better performance
+* Add caching to reduce repeated API calls
+* Build a simple web dashboard to visualize repository access
+
+---
+
+## Author
+
+Jithesh J Shetty
+Malnad College of Engineering
+ISE Engineering
